@@ -13,7 +13,7 @@ class Add
         $this->second = $second;
     }
 
-    public function sum()
+    public function result()
     {
         return $this->first + $this->second;
     }
