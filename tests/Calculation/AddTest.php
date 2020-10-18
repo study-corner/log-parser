@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Calculation;
 
-use App\Add\Add;
+use App\Calculation\Add;
 use PHPUnit\Framework\TestCase;
 
 class AddTest extends TestCase

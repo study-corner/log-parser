@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Add;
+namespace App\Calculation;
 
 class Add
 {
