@@ -10,6 +10,6 @@ class InfoTest extends TestCase
     public function testFirst()
     {
         $info = new Info();
-        $this->assertTrue(true);
+        $this->assertTrue($info->display());
     }
 }
