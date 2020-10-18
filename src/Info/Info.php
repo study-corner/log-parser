@@ -6,6 +6,6 @@ class Info
 {
     public function display()
     {
-        return true;
+        phpinfo();
     }
 }

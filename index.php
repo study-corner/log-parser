@@ -1,5 +1,8 @@
 <?php
 
+use App\Info\Info;
+
 require __DIR__ . '/vendor/autoload.php';
 
-phpinfo();
+$info = new Info();
+$info->display();
