@@ -1,12 +1,20 @@
 <?php
 
-use App\Calculation\Add;
-use App\Calculation\Sub;
-
 require __DIR__ . '/vendor/autoload.php';
 
-$add = new Add(3, 5);
-$sub = new Sub(9, 3);
+use App\Attributes\Dispatcher;
+use App\Attributes\Events\ProductCreated;
+use App\Attributes\Events\ProductDeleted;
+use App\Attributes\ProductSubscriber;
 
-var_dump($add->result());
-var_dump($sub->result());
+
+$productSubscriber = new ProductSubscriber();
+$dispatcher = new Dispatcher();
+$dispatcher->setSubscribers([$productSubscriber]);
+$dispatcher->register();
+
+$event = new ProductCreated('Item was created');
+$dispatcher->dispatch(ProductCreated::class, $event);
+
+$event = new ProductDeleted('Item was deleted');
+$dispatcher->dispatch(ProductDeleted::class, $event);

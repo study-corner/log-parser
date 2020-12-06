@@ -10,6 +10,8 @@ class SerializeTest extends TestCase
 {
     public function testCreate()
     {
+        $this->markTestSkipped('Serializer not available for php 8');
+
         $serialize = new Serialize();
         $response = $serialize->create();
 

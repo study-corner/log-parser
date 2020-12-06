@@ -2,10 +2,8 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.3",
-        "doctrine/orm": "^2.7",
-        "jms/serializer": "^3.10",
-        "phpunit/phpunit": "^9.4"
+        "php": "^8.0",
+        "phpunit/phpunit": "^9.5"
     },
     "config": {
         "preferred-install": {
@@ -13,7 +11,7 @@
         },
         "sort-packages": true,
         "platform": {
-            "php": "7.3"
+            "php": "8.0"
         }
     },
     "autoload": {
