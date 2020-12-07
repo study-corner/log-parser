@@ -8,17 +8,19 @@ use App\Attributes\Events\ProductDeleted;
 
 class ProductSubscriber
 {
+    public function __construct(private Output $output)
+    {
+    }
+
     #[ListensTo(ProductCreated::class)]
     public function onProductCreated(ProductCreated $event)
     {
-        $context = $event->getContext();
-        var_dump($context);
+        $this->output->print($event);
     }
 
     #[ListensTo(ProductDeleted::class)]
     public function onProductDeleted(ProductDeleted $event)
     {
-        $context = $event->getContext();
-        var_dump($context);
+        $this->output->print($event);
     }
 }
