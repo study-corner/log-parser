@@ -3,10 +3,19 @@ declare(strict_types=1);
 
 namespace App\Attributes;
 
+use JetBrains\PhpStorm\Pure;
+
 class Dispatcher
 {
+    private ListenersResolver $listenersResolver;
     private array $subscribers = [];
     private array $listeners = [];
+
+    #[Pure]
+    public function __construct()
+    {
+        $this->listenersResolver = new ListenersResolver();
+    }
 
     public function setSubscribers(array $subscribers)
     {
@@ -16,7 +25,8 @@ class Dispatcher
     public function register()
     {
         foreach ($this->subscribers as $subscriber) {
-            foreach ($this->resolveListeners($subscriber) as [$event, $listener]) {
+            $this->listenersResolver->setSubscriber($subscriber);
+            foreach ($this->listenersResolver->resolve() as [$event, $listener]) {
                 $this->listeners[$event][] = $listener;
             }
         }
@@ -24,28 +34,22 @@ class Dispatcher
 
     public function dispatch(string $event, mixed $object = null): void
     {
-        if (!isset($this->listeners[$event])) {
+        if (!$this->isListenEvent($event)) {
             return;
         }
 
+        $this->executeAllListeners($event, $object);
+    }
+
+    private function isListenEvent(string $event): bool
+    {
+        return isset($this->listeners[$event]);
+    }
+
+    private function executeAllListeners(string $event, mixed $object): void
+    {
         foreach ($this->listeners[$event] as $callback) {
             call_user_func($callback, $object);
         }
-    }
-
-    private function resolveListeners($subscriber): array
-    {
-        $reflectionClass = new \ReflectionClass($subscriber);
-        $listeners = [];
-
-        foreach ($reflectionClass->getMethods() as $method) {
-            $attributes = $method->getAttributes(ListensTo::class);
-            foreach ($attributes as $attribute) {
-                $listensTo = $attribute->newInstance();
-                $listeners[] = [$listensTo->getEvent(), [$subscriber, $method->getName()]];
-            }
-        }
-
-        return $listeners;
     }
 }
