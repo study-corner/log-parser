@@ -24,18 +24,14 @@ class Serialize
             ->addFamilyMember($daughter2);
 
         $serializer = SerializerBuilder::create()->build();
-//        $serializer = SerializerBuilder::create()
-//            ->setPropertyNamingStrategy(new IdenticalPropertyNamingStrategy())
-//            ->build();
 
         return $serializer->deserialize($this->getXml(), User::class, 'xml');
-//        return $serializer->serialize($user, 'xml');
     }
 
     private function getXml()
     {
         return <<<EOF
-<result>
+<user>
     <name>Kes</name>
     <age>37</age>
     <hobbies>
@@ -63,8 +59,7 @@ class Serialize
             <family/>
         </entry>
     </family>
-</result>
+</user>
 EOF;
-
     }
 }
