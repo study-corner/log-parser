@@ -8,8 +8,11 @@ use App\Attributes\Events\ProductDeleted;
 
 class ProductSubscriber
 {
-    public function __construct(private Output $output)
+    private Output $output;
+
+    public function __construct(Output $output)
     {
+        $this->output = $output;
     }
 
     #[ListensTo(ProductCreated::class)]

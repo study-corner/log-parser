@@ -3,12 +3,11 @@ declare(strict_types=1);
 
 namespace App\Serialization;
 
-use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
 use JMS\Serializer\SerializerBuilder;
 
 class Serialize
 {
-    public function create()
+    public function create(): User
     {
         $wife = (new User())->setName('Rita')->setAge(31);
         $daughter1 = (new User())->setName('Rebeka')->setAge(12);

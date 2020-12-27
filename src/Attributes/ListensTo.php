@@ -8,8 +8,11 @@ use Attribute;
 #[Attribute]
 class ListensTo
 {
-    public function __construct(private string $event)
+    private string $event;
+
+    public function __construct(string $event)
     {
+        $this->event = $event;
     }
 
     public function getEvent()

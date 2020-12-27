@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Serialization;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Annotation as Serializer;
 
 class User
@@ -11,25 +10,19 @@ class User
     /**
      * @Serializer\Type("string")
      */
-    private $name;
+    private string $name;
     /**
      * @Serializer\Type("int")
      */
-    private $age;
+    private int $age;
     /**
      * @Serializer\Type("array<string>")
      */
-    private $hobbies = [];
+    private array $hobbies = [];
     /**
-     * @var ArrayCollection
      * @Serializer\Type("array<App\Serialization\User>")
      */
-    private $family;
-
-    public function __construct()
-    {
-        $this->family = new ArrayCollection();
-    }
+    private array $family = [];
 
     public function getName()
     {
@@ -69,7 +62,7 @@ class User
 
     public function addFamilyMember(User $member): self
     {
-        $this->family->add($member);
+        $this->family[] = $member;
 
         return $this;
     }

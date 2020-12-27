@@ -5,8 +5,11 @@ namespace App\Attributes\Events;
 
 class Event
 {
-    public function __construct(private string $context)
+    private string $context;
+
+    public function __construct(string $context)
     {
+        $this->context = $context;
     }
 
     public function getContext(): string
