@@ -16,7 +16,7 @@ class ListenersResolver
 
     public function resolve(): array
     {
-        if (!$this->hasSubscriber()){
+        if (!$this->hasSubscriber()) {
             throw new \RuntimeException('Set subscriber before resolve it');
         }
 

@@ -5,5 +5,4 @@ namespace App\Attributes\Events;
 
 class ProductDeleted extends Event
 {
-
 }

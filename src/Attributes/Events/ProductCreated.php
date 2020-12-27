@@ -5,5 +5,4 @@ namespace App\Attributes\Events;
 
 class ProductCreated extends Event
 {
-
 }
