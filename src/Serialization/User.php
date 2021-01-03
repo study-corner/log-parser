@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Serialization;
 
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 class User
 {
