@@ -3,8 +3,13 @@
     "license": "proprietary",
     "require": {
         "php": "^7.4",
+        "ext-json": "*",
+        "ext-simplexml": "*",
+        "doctrine/cache": "^1.10",
         "jms/serializer": "^3.10",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "symfony/property-access": "^5.2",
+        "symfony/serializer": "^5.2"
     },
     "config": {
         "preferred-install": {

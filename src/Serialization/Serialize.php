@@ -4,6 +4,11 @@ declare(strict_types=1);
 namespace App\Serialization;
 
 use JMS\Serializer\SerializerBuilder;
+use Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class Serialize
 {
@@ -22,14 +27,23 @@ class Serialize
             ->addFamilyMember($daughter1)
             ->addFamilyMember($daughter2);
 
-        $serializer = SerializerBuilder::create()->build();
+//        $serializer = SerializerBuilder::create()
+//            ->setCacheDir('/var/www/plain-sandbox/var/cache')
+//            ->build();
 
-        return $serializer->deserialize($this->getXml(), User::class, 'xml');
+        $encoders = [new XmlEncoder()];
+        $objectNormalizer = new ObjectNormalizer();
+        $normalizers = [$objectNormalizer];
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $user = $serializer->deserialize($this->getSymfonyXml(), User::class, 'xml');
+
+        return $user;
     }
 
-    private function getXml()
+    private function getJmsXml(): string
     {
-        return <<<EOF
+        return <<<XML
 <user>
     <name>Kes</name>
     <age>37</age>
@@ -59,6 +73,38 @@ class Serialize
         </entry>
     </family>
 </user>
-EOF;
+XML;
+    }
+
+    private function getSymfonyXml(): string
+    {
+        return <<<XML
+<response>
+    <name>Kes</name>
+    <age>37</age>
+    <hobbies>chess</hobbies>
+    <hobbies>exercise</hobbies>
+    <hobbies>prograamming</hobbies>
+    <family>
+        <name>Rita</name>
+        <age>31</age>
+        <hobbies/>
+        <family/>
+    </family>
+    <family>
+        <name>Rebeka</name>
+        <age>12</age>
+        <hobbies/>
+        <family/>
+    </family>
+    <family>
+        <name>Elija</name>
+        <age>4</age>
+        <hobbies/>
+        <family/>
+    </family>
+</response>
+XML;
+
     }
 }

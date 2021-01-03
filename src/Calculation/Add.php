@@ -1,11 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Calculation;
 
 class Add
 {
-    private $first;
-    private $second;
+    private int $first;
+    private int $second;
 
     public function __construct(int $first, int $second)
     {
@@ -13,7 +14,7 @@ class Add
         $this->second = $second;
     }
 
-    public function result()
+    public function result(): int
     {
         return $this->first + $this->second;
     }

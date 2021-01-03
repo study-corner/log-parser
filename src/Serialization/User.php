@@ -24,7 +24,7 @@ class User
      */
     private array $family = [];
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -36,7 +36,7 @@ class User
         return $this;
     }
 
-    public function getAge()
+    public function getAge(): int
     {
         return $this->age;
     }
@@ -48,7 +48,7 @@ class User
         return $this;
     }
 
-    public function getHobbies()
+    public function getHobbies(): array
     {
         return $this->hobbies;
     }
@@ -65,5 +65,13 @@ class User
         $this->family[] = $member;
 
         return $this;
+    }
+
+    /**
+     * @return User[]
+     */
+    public function getFamily(): array
+    {
+        return $this->family;
     }
 }

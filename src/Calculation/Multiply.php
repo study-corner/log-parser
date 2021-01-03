@@ -5,8 +5,8 @@ namespace App\Calculation;
 
 class Multiply
 {
-    private $first;
-    private $second;
+    private int $first;
+    private int $second;
 
     public function __construct(int $first, int $second)
     {

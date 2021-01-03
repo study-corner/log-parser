@@ -15,6 +15,10 @@ class SerializeTest extends TestCase
         $user = $serialize->create();
 
         $this->assertInstanceOf(User::class, $user);
-        $this->assertTrue(true);
+        $family = $user->getFamily();
+        $this->assertCount(3, $family);
+        foreach($family as $item) {
+            $this->assertInstanceOf(User::class, $item);
+        }
     }
 }
